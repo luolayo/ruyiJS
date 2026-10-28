@@ -10,7 +10,7 @@
 #include "js/CharacterEncoding.h"
 #include "js/PropertyAndElement.h"
 #include "js/Realm.h"
-#include <windows.h>
+#include "runtime/platform_process.h"
 
 namespace ruyijs::web_workers {
 Child::Child(JSContext* cx, JS::HandleObject page, PageHelpers& helpers,
@@ -34,7 +34,7 @@ bool Child::Send(JSContext* cx, unsigned argc, JS::Value* vp) {
     return WebKit::Fail(cx, "Worker global postMessage receiver is invalid");
   std::string frame;
   if (WorkerTokenEnabled()) {
-    WorkerMessageToken token{uint64_t(GetCurrentProcessId()), ++child.childSequence_, 1};
+    WorkerMessageToken token{uint64_t(CurrentProcessId()), ++child.childSequence_, 1};
     if (!EncodeMessageWithToken(cx, child.exception_, args[0], args.get(1), token, &frame)) return false;
   } else if (!EncodeMessage(cx, child.exception_, args[0], args.get(1), &frame)) return false;
   if (!child.pipe_.Queue(std::move(frame))) return WebKit::Fail(cx, "Worker outgoing queue is full or closed");
@@ -80,7 +80,7 @@ bool Child::Serve(Checkpoint checkpoint, ExceptionCapture& errors, const ChildTa
         if (framePort_ && !framePort_(frameContext_, frame)) return false;
       } else if (WorkerTokenEnabled() && frame.size() && frame[0] == '\x02') {
         if (!DecodeMessageWithToken(cx_, frame, &lastIncoming_, &value) ||
-            lastIncoming_.direction != 0 || lastIncoming_.workerId != uint64_t(GetCurrentProcessId()) ||
+            lastIncoming_.direction != 0 || lastIncoming_.workerId != uint64_t(CurrentProcessId()) ||
             !events_.FireMessage(kit_.page, value, "", nullptr)) return false;
       } else if (!DecodeMessage(cx_, frame, &value) || !events_.FireMessage(kit_.page, value, "", nullptr)) {
         return false;
@@ -97,7 +97,7 @@ bool Child::Serve(Checkpoint checkpoint, ExceptionCapture& errors, const ChildTa
       if (tasks.begin) tasks.begin(tasks.context);
       executed = tasks.pump(tasks.context);
     }
-    if (!received && !executed) Sleep(2);
+    if (!received && !executed) SleepMilliseconds(2);
   }
 }
 }

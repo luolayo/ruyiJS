@@ -1,0 +1,15 @@
+{
+  "version": "158.0",
+  "git_revision": "3c71aeacdb296402e41fb2084b13e797d1770642",
+  "git_tag": "FIREFOX_158_0_RELEASE",
+  "source_url": "https://archive.mozilla.org/pub/firefox/releases/158.0/source/firefox-158.0.source.tar.xz",
+  "checksums_url": "https://archive.mozilla.org/pub/firefox/releases/158.0/SHA256SUMS",
+  "source_sha256": "fc77f7801d7580a600af683cc367e261eb1ec74647e84a91b4a1e3c1dd5aa2bb",
+  "source_directory": "firefox-158.0",
+  "target": "aarch64-apple-darwin",
+  "python_minor": "3.13",
+  "reference_browser": {
+    "url": "https://archive.mozilla.org/pub/firefox/releases/158.0/mac/en-US/Firefox%20158.0.dmg",
+    "sha256": "dfe8508ee8880cec1578253eb02b9154b5971a55e832d97396f463cd07b5ef67"
+  }
+}

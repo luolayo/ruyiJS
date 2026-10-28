@@ -4,12 +4,12 @@
 namespace ruyijs::resource_network {
 namespace {
 constexpr uint32_t kBodyLimit = Limits::body_bytes, kFieldLimit = 65536, kHeaderLimit = 256;
-bool WriteText(NeckoPipe& pipe, const std::string& text, ULONGLONG deadline) {
+bool WriteText(NeckoPipe& pipe, const std::string& text, uint64_t deadline) {
   if (text.size() > kFieldLimit) return false;
   const uint32_t size = uint32_t(text.size());
   return pipe.Write(&size, 4, deadline) && pipe.Write(text.data(), size, deadline);
 }
-bool ReadText(NeckoPipe& pipe, std::string* text, ULONGLONG deadline) {
+bool ReadText(NeckoPipe& pipe, std::string* text, uint64_t deadline) {
   uint32_t size = 0;
   if (!pipe.Read(&size, 4, deadline) || size > kFieldLimit) return false;
   text->assign(size, '\0');
@@ -17,7 +17,7 @@ bool ReadText(NeckoPipe& pipe, std::string* text, ULONGLONG deadline) {
 }
 }
 bool WriteNeckoRequest(NeckoPipe& pipe, const std::string& method, const std::string& url,
-                       const HeaderPairs& headers, const std::string& body, ULONGLONG deadline) {
+                       const HeaderPairs& headers, const std::string& body, uint64_t deadline) {
   if (headers.size() > kHeaderLimit || body.size() > kBodyLimit) return false;
   size_t bytes = 0;
   for (const auto& field : headers) {
@@ -32,7 +32,7 @@ bool WriteNeckoRequest(NeckoPipe& pipe, const std::string& method, const std::st
     if (!WriteText(pipe, field.first, deadline) || !WriteText(pipe, field.second, deadline)) return false;
   return pipe.Write(&size, 4, deadline) && pipe.Write(body.data(), size, deadline);
 }
-bool ReadNeckoResponse(NeckoPipe& pipe, HttpResult* result, ULONGLONG deadline, bool* framed) {
+bool ReadNeckoResponse(NeckoPipe& pipe, HttpResult* result, uint64_t deadline, bool* framed) {
   uint32_t status = 0, count = 0, size = 0;
   if (framed) *framed = false;
   if (!pipe.Read(&status, 4, deadline)) return false;

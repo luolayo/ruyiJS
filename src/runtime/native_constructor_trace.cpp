@@ -4,13 +4,17 @@
 namespace ruyijs {
 NativeConstructorTrace::NativeConstructorTrace(JSContext* cx, const JS::CallArgs& args)
     : cx_(cx), args_(args) {
+#if RUYIJS_HAS_STANDALONE_TRACE
   enabled_ = args.isConstructing() &&
       js::standalone_trace::IsEnabled(js::standalone_trace::Category::Ruyijs);
   if (enabled_)
     js::standalone_trace::EnterCall(cx_, args_, true, "native-constructor", &state_);
+#endif
 }
 NativeConstructorTrace::~NativeConstructorTrace() {
+#if RUYIJS_HAS_STANDALONE_TRACE
   if (enabled_)
     js::standalone_trace::LeaveCall(cx_, args_, state_, ok_ && !JS_IsExceptionPending(cx_));
+#endif
 }
 }

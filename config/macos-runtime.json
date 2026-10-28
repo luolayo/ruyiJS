@@ -1,0 +1,5 @@
+{
+  "deployment_target": "26.0",
+  "link_deployment_target": "27.0",
+  "reason": "The C++ code uses macOS 26 libc++ floating-point from_chars. The local OpenSSL bottle requires macOS 27; this development binary targets 27 until portable dependency packaging is implemented."
+}

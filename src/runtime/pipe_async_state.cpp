@@ -3,17 +3,25 @@
 
 namespace ruyijs {
 PipeAsync::PipeAsync() {
+#ifdef _WIN32
   accept.value.hEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
   read.value.hEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
   write.value.hEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
+#endif
 }
 PipeAsync::~PipeAsync() {
+#ifdef _WIN32
   if (accept.value.hEvent) CloseHandle(accept.value.hEvent);
   if (read.value.hEvent) CloseHandle(read.value.hEvent);
   if (write.value.hEvent) CloseHandle(write.value.hEvent);
+#endif
 }
 bool PipeAsync::Valid() const {
+#ifdef _WIN32
   return accept.value.hEvent && read.value.hEvent && write.value.hEvent;
+#else
+  return true;
+#endif
 }
 PipeAsync* NewPipeAsync() {
   try {
@@ -23,6 +31,7 @@ PipeAsync* NewPipeAsync() {
   } catch (...) {}
   return nullptr;
 }
+#ifdef _WIN32
 void Pipe::Close() {
   if (async_) {
     if (handle_) {
@@ -36,6 +45,7 @@ void Pipe::Close() {
   }
   if (handle_) { CloseHandle(handle_); handle_ = nullptr; }
 }
+#endif
 bool Pipe::Queue(std::string frame) {
   if (!async_ || !ValidFrameSize(frame.size()) ||
       async_->terminal == PipeResult::Closed || async_->terminal == PipeResult::Failed)
@@ -53,7 +63,7 @@ size_t Pipe::queuedBytes() const { return async_ ? async_->queuedBytes : 0; }
 size_t Pipe::queuedFrames() const { return async_ ? async_->outgoing.size() : 0; }
 bool Pipe::connected() const { return async_ && async_->connected; }
 PipeResult Pipe::Flush() {
-  if (!async_ || !handle_) return PipeResult::Failed;
+  if (!async_ || !IsOpen()) return PipeResult::Failed;
   auto& state = *async_;
   if (state.terminal == PipeResult::Closed || state.terminal == PipeResult::Failed) return state.terminal;
   const auto connected = PipeAccept(handle_, state);
@@ -64,7 +74,7 @@ PipeResult Pipe::Flush() {
 }
 PipeResult Pipe::Poll(std::string* frame, bool* received) {
   *received = false;
-  if (!async_ || !handle_) return PipeResult::Failed;
+  if (!async_ || !IsOpen()) return PipeResult::Failed;
   auto& state = *async_;
   if (state.terminal == PipeResult::Closed || state.terminal == PipeResult::Failed)
     return state.terminal;

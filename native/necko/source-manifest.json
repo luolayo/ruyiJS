@@ -1,0 +1,318 @@
+{
+  "source_wheel": "ruyijs-0.1.5-py3-none-win_amd64.whl",
+  "sha256": "cc4c0ed62ba28b55d19eea517e0d4e937cabf6502e48c8f7c241bdcc66e5bd03",
+  "files": [
+    {
+      "path": "native/necko/python/necko/__init__.py",
+      "sha256": "4ca205e02db77cbfdc0c6652168e95f5117123f6ba11540fb74bc79b23c47d48"
+    },
+    {
+      "path": "native/necko/python/necko/_connect.py",
+      "sha256": "38721dd463a2dd054b971c3514107f4d5ad8a1a2094d87bb0386fede31064d7d"
+    },
+    {
+      "path": "native/necko/python/necko/_firefox.py",
+      "sha256": "1d403f26f81a87a433859b97f9b67a401f805575fa76baf41dc64f803f0ff1e5"
+    },
+    {
+      "path": "native/necko/python/necko/_http2.py",
+      "sha256": "93c4219c37abaa5dedc1cc836b9e89b64715279667272b9dffb68886553f26e4"
+    },
+    {
+      "path": "native/necko/python/necko/_http3.py",
+      "sha256": "e41da26b7c9df02cec0f351e5e5f8297a32c955610e4777fd1feb12140d4b697"
+    },
+    {
+      "path": "native/necko/python/necko/_nss.py",
+      "sha256": "32f179b52d7ec8b377164ed69f6729dabe861e03324cef8e4b21933683e7190a"
+    },
+    {
+      "path": "native/necko/python/necko/_retry.py",
+      "sha256": "01cb005756da4671a1805302c46c946085526287f85d05769c352f76cb189ed9"
+    },
+    {
+      "path": "native/necko/python/necko/_socks.py",
+      "sha256": "114524d52d0107994fcf1fb34efa73c2c42612ca1571e8896468404d9ad52163"
+    },
+    {
+      "path": "native/necko/python/necko/_transport.py",
+      "sha256": "3e946db97458a75008d76f94317d69ba1006c7b3e7474681af63c454f91b908d"
+    },
+    {
+      "path": "native/necko/python/necko/adapters.py",
+      "sha256": "127ba26880bb81a9405e2dfe574a66446341f6e0a278f3d74a7b6ea7eeca931d"
+    },
+    {
+      "path": "native/necko/python/necko/api.py",
+      "sha256": "56c3980a011cce250744411cfad01b05db986f7bc5dcac8b2f250bbc913bb81b"
+    },
+    {
+      "path": "native/necko/python/necko/firefox-profile.json",
+      "sha256": "8988bc01c6ca4648032c5c1d4fb18358f9b43382cfdbd8758e7cc7ee2a8084b3"
+    },
+    {
+      "path": "native/necko/python/necko/firefox-root-constraints.json",
+      "sha256": "44ecc1d2c59eca1a3bcfc82c576ed5a91f7bb1c33ca550e8f3b8744c5d0a6650"
+    },
+    {
+      "path": "native/necko/python/necko/firefox-roots.pem",
+      "sha256": "8d6fe75aa8d3c2c539410d268996c469c5089a60c897691dfce61fd88ca5feb8"
+    },
+    {
+      "path": "native/necko/python/necko/firefox-suffixes.dat",
+      "sha256": "737075296d578aabae00a5871219abc6af1153b0eb3182bad04e533942b44cce"
+    },
+    {
+      "path": "native/necko/python/necko/quic-build.json",
+      "sha256": "e2ba5ec30eaab6d82a0831e8cf36cd968b82a695b11261a80823e5ffa682bccc"
+    },
+    {
+      "path": "native/necko/python/necko/sessions.py",
+      "sha256": "ebaaa8541d25ee66d5461b9ba42c02d75c004822d3faae670b46088caafd9943"
+    },
+    {
+      "path": "native/necko/python/necko/licenses/firefox-license.html",
+      "sha256": "254d8bf132427da65f8a83f38788ecc5d3cecd5b0a546d6d0967c1e6de32fdf9"
+    },
+    {
+      "path": "native/necko/python/necko/licenses/firefox-notice.txt",
+      "sha256": "a799adf18bfb1911f16086dc0e2a6d1cd0e31272f47e7ee6841b465b74d249de"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/__init__.py",
+      "sha256": "16ee0fa04fe2a753dfc97194044b94cac4ae0c6fd8091baee91bde5453a3e321"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/body_reader.py",
+      "sha256": "ef566775506dc8338dfb43ccf023cc9d36741ba997836f6ff5bbef36ced1dd7a"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/brotli_native.py",
+      "sha256": "9c897266f1247f8e47805e5f9d66de95d4ff678687d3b1d5458e5a47f274a91c"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/cache_snapshot.py",
+      "sha256": "558946899cebb321862bd8eb60708f2c497e798fd845dcc88b956cb3272ee967"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/coalescing_snapshot.py",
+      "sha256": "8875984a1eeae6f471bbf1937c959d09fd91583a5ffc31c0a6ae564065dda27f"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/codec.py",
+      "sha256": "d01beca63df6a9e8d29cee00a7404864ed1dcfc7e3547df6780cbd69dfa11a50"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/command_budget.py",
+      "sha256": "1b98b43ddc575c2673894ea9c7ef54a33cf91e4602ece3c60c5dacbd4a649892"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/connection_budget.py",
+      "sha256": "7720bf9f96ece4484d69c8503c9fe85ba40e49daf8ea92888c2d41cb71565d49"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/connection_control.py",
+      "sha256": "4ff57fbfd1557192226cf8a6f0a8d3824406ee5f394fa186b82ca71e9e727069"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/connection_lifetime.py",
+      "sha256": "eabf1c342c084252168f7b3cb517510d3f809fbcf1ce78fdcb0c89034d8b17dc"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/controlled_send.py",
+      "sha256": "219e1b30a8281df5868c3d6218c506630630d5197205e70f8afa4277d2eb0076"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/decoder.py",
+      "sha256": "5d20d7d12119bbf724326c4ad1cd1c27dc9c106a7bc1714ae51ab2432af12f8c"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/launch.py",
+      "sha256": "138b7e09a1ae6cebaeb85072b5c613337e06d27662084f24ce8379b8fc33b65b"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/lease.py",
+      "sha256": "46201381e2b38b28c2139dfb3a924770a6d21f01162cede9e4e0059e16ea3869"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/oneshot.py",
+      "sha256": "0a256812c5379f75ec84de9ce4a6c040b7db81902ecddeb6c27d76d54d758303"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/request_control.py",
+      "sha256": "98fdd65d1664ca9c8fee6024636ae0a6db40f64a9bf47b79bf1f539da44e44a9"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/resolver.py",
+      "sha256": "78748e85ae409d2ffdf3a595b7915d9038bc1f97e6a51ed830c8ed819c5f0b1e"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/resolver_child.py",
+      "sha256": "27ba19a505ff3e453f837651daa7aaa523697f986d21da6f17955b5f15f2efd4"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/socket_control.py",
+      "sha256": "b6b2a5501acd3ac7a00c94125a20d9bc18fe63c35124c4722374925ba12a25c3"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/stream_control.py",
+      "sha256": "c499daf8a01ba6b6d9eeb81bba825875dc65db4495474950febb99b945905b8d"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/transport_resources.py",
+      "sha256": "263cf63b7e8d841795a967fa7fafe6fb32c9a40617d24ebdb1c8de29bbcbecc0"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/upload.py",
+      "sha256": "89c2c80cd87fff44f43fad5300c2c1d0bbc9f76fcc27f83cf2df2549ec6c4673"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/webtransport_session.py",
+      "sha256": "6ee218ffabad993096b785dd48f432f23a80fa0415f068b628a96d60e93dc940"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/webtransport_verify.py",
+      "sha256": "d6826332dd92351f9443f780729c83ddf05aad67e1d89df6e3f521876be1d8a8"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/webtransport_wire.py",
+      "sha256": "c70d2ae3e5a0fea6a12128463a42435eeff965859d04e447313de1ac0cad2bab"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/webtransport_worker.py",
+      "sha256": "f2ed3a910c2990f2abd42db9fb594926c3bb2b6507894209d946bf7f18f92cf0"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/wire_fields.py",
+      "sha256": "7f0ea4872ecdd67a2cd38a50ca0d6b51ae4c76f5494861fec0a81b4dc6951f94"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_body_handoff.py",
+      "sha256": "34f4fd7a43178c592aac1e181af830311c64cdb1f1e4dd1f411bc6f79d9265f6"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_body_outbox.py",
+      "sha256": "80c18d67b9ea1f1c347adaa4282d1a4d4086a0c91eb33fe69bb2702731b20e3d"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_body_reader_io.py",
+      "sha256": "633f6b0e9790d278211267bae811aeed1de2e83489cb0669b310de2993884653"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_body_types.py",
+      "sha256": "ef84c6108bd270b3076a243a8a20ceeaec3ed438b4cac4c1ab7189e90e0fab14"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_body_write_handoff.py",
+      "sha256": "9680a827a2d614a67f8e09faabd7f3e2b9d875c58b6804d5c62b06666e7d3560"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_body_write_types.py",
+      "sha256": "fcaba31ec9d6a39a989fd164762e413416f55b60d63a9b100c8ae9a699a9a773"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_body_writer_io.py",
+      "sha256": "83a5d1e128f0a327f1c0a573c2f5ad034bb23c123b6a988814d8ba112a5ceccf"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_channel.py",
+      "sha256": "9c7e7ff01edc565c778ae53911bcb39cdb759e68fc840bdb3cfee8f201241c0d"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_channel_io.py",
+      "sha256": "34714787b241aa9aaaa8d6142551205cae2d297c10839d427f36c0878f33d159"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_channel_win.py",
+      "sha256": "607de4761e9d308fa72c300f4e16336cd635c2fb40ca7793dbaf59aab722dfd3"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_credit.py",
+      "sha256": "6f04133a8993c0d13b33fe20e9e9a4195ffae5b385138316f42547eaceff7b41"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_credit_receiver.py",
+      "sha256": "4d16fed376ec1402f99b98a5c141c670622308573828201920f831af30689dc3"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_credit_types.py",
+      "sha256": "ea4f949aa185532c783f87c8136580b9e4dd4080743b7c7e7dc425d1a9436d57"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_dispatch.py",
+      "sha256": "f2ea751369385a3d231c100b790e202c337b055221528cf537aebe8b1ef98ba5"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_frames.py",
+      "sha256": "74b3ccb57a7b92da131ce02b9ad5c8f5a60a3a41dd294d2e021deb80eead724b"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_json.py",
+      "sha256": "d51a21b7b9bb6a7a6253c58542aabc6c0aaedae16df1f2be54f96f74d12344e1"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_json_scan.py",
+      "sha256": "dc33a2040a48b1bf43a0422f3d7755fa328c41c81138923b7cdb3c464e5a5a04"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_outbound.py",
+      "sha256": "1e3d210e09b0e12fbfed6a7efa64a26a8f26064affbe5978d0c0e34e964c1b4d"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_outbound_record.py",
+      "sha256": "ab85a5bc2307a9919031908086c17ec6790dfef77fb639d9e7a370adf2ca705f"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_outbound_release.py",
+      "sha256": "8b1e32f98081551866019d242d0d8b969581581a41683abc17dae9e2e2bdeeab"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_registry.py",
+      "sha256": "753c6d926e4203ecca0d5d7d5eb1dea7786157389cda50bb29de5e3da40862ed"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_registry_lifecycle.py",
+      "sha256": "98eb5f4e72b67193c40c5a91a028cdf61ff559aa4df03016094e9141c8354615"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_registry_types.py",
+      "sha256": "ceb09a435fe74187fb3440c62c75f9c00c9dd244b4c3eb1cca344c28d87f16b5"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_schema.py",
+      "sha256": "9a20dbd8758ac40aec758423030c11f6af3cd4f3f637189d7cb4f12151e3c6d5"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_schema_types.py",
+      "sha256": "ed410d4fa5dbb1b8a2cfe232c6b986b0a28bae2e3d4c1905214cf5fce5ee3775"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_schema_values.py",
+      "sha256": "70d6842aff941ed30aed21cdf95092fe2537295d28f02a0daa227eca5ce7bb6c"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_session.py",
+      "sha256": "9d45215c01c181279e525b2427402a02389110b020fc107952835c68a7d768b9"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_session_identity.py",
+      "sha256": "a356381e11295b29619b72ead064cf9068714a50bcd6c61e69dd1be9cdb89856"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_slot_lease.py",
+      "sha256": "aa4d7e5e9f551e38653120dac105fdbce60531f71930a5d263eed85dd2fe4f09"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_slots.py",
+      "sha256": "dd0fcdff8b88bb81ce4e022a805eb25bd71249b1d6ba2941e8e759ce911c2295"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_spool.py",
+      "sha256": "fc6ae985d719bda25f8e0e008faa85fd5671228593ab3f988c4501678e6c822f"
+    },
+    {
+      "path": "native/necko/python/ruyijs_necko/worker_spool_budget.py",
+      "sha256": "b144b16273e9ee860558e0381474b4fb35b10506f47a13084406bd1e7ab49f80"
+    }
+  ]
+}

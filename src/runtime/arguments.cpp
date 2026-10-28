@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iterator>
 #include <cstdlib>
+#ifdef _WIN32
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -11,11 +12,18 @@
 #endif
 #include <windows.h>
 #include <shellapi.h>
+#else
+#include <unistd.h>
+#endif
 
 namespace ruyijs {
 namespace {
 bool ExpandTracePid(std::string& path) {
+#ifdef _WIN32
   const std::string pid = std::to_string(GetCurrentProcessId());
+#else
+  const std::string pid = std::to_string(getpid());
+#endif
   bool changed = false;
   size_t offset = 0;
   while ((offset = path.find("{pid}", offset)) != std::string::npos) {
@@ -55,6 +63,7 @@ bool Arguments::Prepare(int* count, char*** values) {
         !strncmp((*values)[index], "--ruyijs-worker=", 16)) product = true;
   }
   if (!product) return true;
+#ifdef _WIN32
   int wideCount;
   wchar_t** wide = CommandLineToArgvW(GetCommandLineW(), &wideCount);
   if (!wide) return false;
@@ -70,6 +79,9 @@ bool Arguments::Prepare(int* count, char*** values) {
     strings_.push_back(std::move(text));
   }
   LocalFree(wide);
+#else
+  strings_.assign(*values, *values + *count);
+#endif
   PrepareTracePath(strings_);
   for (auto& text : strings_) pointers_.push_back(text.data());
   pointers_.push_back(nullptr);
@@ -79,11 +91,15 @@ bool Arguments::Prepare(int* count, char*** values) {
 }
 
 bool ReadUTF8File(const char* path, std::string* output) {
+#ifdef _WIN32
   int count = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, path, -1, nullptr, 0);
   if (!count) return false;
   std::wstring wide(count, L'\0');
   MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, path, -1, wide.data(), count);
   std::ifstream file(wide.c_str(), std::ios::binary);
+#else
+  std::ifstream file(path, std::ios::binary);
+#endif
   if (!file) return false;
   output->assign(std::istreambuf_iterator<char>(file), {});
   return !file.bad();

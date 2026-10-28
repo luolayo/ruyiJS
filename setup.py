@@ -1,4 +1,4 @@
-"""Build a platform wheel containing the unchanged standalone runtime."""
+"""Build a platform wheel containing a validated standalone runtime."""
 from pathlib import Path
 import platform
 import shutil
@@ -9,7 +9,16 @@ from setuptools.command.bdist_wheel import bdist_wheel
 from setuptools.command.build_py import build_py
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "tools"))
-from wheel_runtime import obtain_runtime, validate, digest
+from wheel_runtime import digest
+
+
+def wheel_platform():
+    machine = platform.machine().lower()
+    if sys.platform == "win32" and machine in ("amd64", "x86_64"):
+        return "win_amd64"
+    if sys.platform == "darwin" and machine in ("arm64", "aarch64"):
+        return "macosx_27_0_arm64"
+    raise RuntimeError("ruyijs wheels require Windows x64 or macOS ARM64")
 
 # Captured third-party responses and cookies used only for offline replay stay out of the wheel.
 EXAMPLES_EXCLUDED = shutil.ignore_patterns("__pycache__", "*.pyc", "fixture", "interstitial_fixture",
@@ -24,16 +33,20 @@ class PlatformDistribution(Distribution):
 class BuildPython(build_py):
     def get_outputs(self, include_bytecode=True):
         outputs = list(super().get_outputs(include_bytecode=include_bytecode))
-        examples = Path(self.build_lib) / "ruyijs/examples"
-        if examples.exists():
-            outputs.extend(str(path) for path in examples.rglob("*") if path.is_file())
+        for name in ("examples", "_runtime"):
+            directory = Path(self.build_lib) / "ruyijs" / name
+            if directory.exists():
+                outputs.extend(str(path) for path in directory.rglob("*") if path.is_file())
         return sorted(set(outputs))
 
     def run(self):
-        if sys.platform != "win32" or platform.machine().lower() not in ("amd64", "x86_64"):
-            raise RuntimeError("ruyijs requires Windows x64 and a 64-bit Python installation")
+        selected = wheel_platform()
         if sys.maxsize <= 2 ** 32:
             raise RuntimeError("ruyijs requires 64-bit Python")
+        if selected == "macosx_27_0_arm64":
+            from wheel_runtime_macos import obtain_runtime, validate
+        else:
+            from wheel_runtime import obtain_runtime, validate
         super().run()
         runtime = obtain_runtime(Path(__file__).resolve().parent)
         target = Path(self.build_lib) / "ruyijs/_runtime"
@@ -62,10 +75,10 @@ class PlatformWheel(bdist_wheel):
     def finalize_options(self):
         super().finalize_options()
         self.root_is_pure = False
-        self.plat_name = "win_amd64"
+        self.plat_name = wheel_platform()
 
     def get_tag(self):
-        return "py3", "none", "win_amd64"
+        return "py3", "none", wheel_platform()
 
 
 setup(distclass=PlatformDistribution,

@@ -1,7 +1,12 @@
 // The donor's original Brotli defaults and PROCESS/FINISH operations.
 #include "web_platform/compression_codec.h"
+#ifdef _WIN32
 #include "../../vendor/compression-native/brotli/include/brotli/encode.h"
 #include "../../vendor/compression-native/brotli/include/brotli/decode.h"
+#else
+#include <brotli/encode.h>
+#include <brotli/decode.h>
+#endif
 
 namespace ruyijs::web_platform {
 void* OpenBrotliCodec(bool decompress) {

@@ -4,7 +4,7 @@
 #include <vector>
 
 namespace ruyijs {
-// Only product mode replaces the CRT's lossy ANSI argv with Windows UTF-8 argv.
+// Product mode owns UTF-8 argv and expands per-process trace paths.
 // This object outlives OptionParser and every borrowed option value.
 class Arguments final {
  public:

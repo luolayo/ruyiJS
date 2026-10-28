@@ -253,7 +253,7 @@ Windows x64（64 位）上的 Python 3.10 及以上版本，已测试至 Python 
 <details>
 <summary><b>支持 macOS 或 Linux 吗？</b></summary>
 
-暂不支持，目前仅限 Windows x64。跨平台支持在计划中。
+已发布的 wheel 仍仅支持 Windows x64。实验性 Apple Silicon 本地 wheel 和源码构建已在 macOS 27 跑通真实 `Context.eval()`、DOM、回调及 HTTP/HTTPS 联网（HTTP/1.1、HTTP/2、HTTP/3）及 WebTransport，详见 [Mac 运行时说明](docs/macos-arm64-runtime.md)和[网络说明](docs/macos-arm64-network.md)。HTTP/3 和 WebTransport 已通过本地真实 QUIC 服务端验证；当前测试环境的公网 UDP 请求被拒绝。Mac wheel 已完成打包和隔离离线安装测试，详见 [wheel 说明](docs/macos-arm64-wheel.md)；尚未发布或公证。Linux 暂不支持。
 </details>
 
 <details>

@@ -1,0 +1,9 @@
+{
+  "platform": "macosx_27_0_arm64",
+  "minimum_macos": "27.0",
+  "openssl": {
+    "version": "OpenSSL 3.5.9 29 Sep 2026 (Library: OpenSSL 3.5.9 29 Sep 2026)",
+    "library_sha256": "e33ec992b3bb291f26b919a89880f307eef3d15339253fab6ec60464a85f16db",
+    "license_sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+  }
+}

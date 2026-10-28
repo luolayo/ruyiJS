@@ -1,0 +1,7 @@
+{
+  "base_files": {
+    "js/src/rust/Cargo.toml": "c637a021f703c0107eda06f78d3575bcdc82ba299c093f1c433ccc54e6aae54a",
+    "js/src/rust/lib.rs": "30f6b339d367c02e7fe3e8f65458103616d5acc8cb91ff23a5d1124348725757"
+  },
+  "dependency": "native/urlpattern"
+}

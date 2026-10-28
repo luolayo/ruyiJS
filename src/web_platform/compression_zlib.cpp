@@ -1,6 +1,16 @@
 // Original zlib-rs C ABI; private prefix leaves existing MOZ_Z_ users unchanged.
 #include "web_platform/compression_codec.h"
+#ifdef _WIN32
 #include "../../vendor/compression-native/zlib-headers/zlib.h"
+#else
+#include <zlib.h>
+#define RUYIJS_CS_Z_deflateInit2_ deflateInit2_
+#define RUYIJS_CS_Z_inflateInit2_ inflateInit2_
+#define RUYIJS_CS_Z_deflate deflate
+#define RUYIJS_CS_Z_inflate inflate
+#define RUYIJS_CS_Z_deflateEnd deflateEnd
+#define RUYIJS_CS_Z_inflateEnd inflateEnd
+#endif
 #include <new>
 #include <limits>
 
@@ -13,7 +23,9 @@ int RUYIJS_CS_Z_deflateEnd(z_streamp);
 int RUYIJS_CS_Z_inflateEnd(z_streamp);
 }
 namespace ruyijs::web_platform {
+#ifdef _WIN32
 static_assert(sizeof(z_stream)==88,"MSVC x64 original z_stream ABI");
+#endif
 void* OpenZlibCodec(CompressionFormat format,bool decompress) {
   auto* stream=new(std::nothrow) z_stream{};
   if (!stream) return nullptr;

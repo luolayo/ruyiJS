@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include "web_geometry/font_backend.h"
 #include "firefox_font_prefs.h"
 #include "web_geometry/font_config.h"
@@ -107,3 +108,5 @@ std::vector<std::wstring> FontFamilies(const FontInput& input) {
   return result;
 }
 }
+
+#endif

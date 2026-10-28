@@ -1,0 +1,13 @@
+{
+  "firefox_source_sha256": "fc77f7801d7580a600af683cc367e261eb1ec74647e84a91b4a1e3c1dd5aa2bb",
+  "neqo_version": "0.31.1",
+  "nss_rs_version": "0.14.6",
+  "nss_rs_revision": "63c63046208f587573f71bb3885f16d10e0bf4eb",
+  "vendor_manifests_sha256": {
+    "neqo-common/.cargo-checksum.json": "1f569a15ddaad35583ad0b01ada23f4b62909301fc73b2d79b8066fcf0ef3c7f",
+    "neqo-transport/.cargo-checksum.json": "8a9384b9239fe180eefd1c3c636cfc8975c4f3596ba81bc297c4a53447452caa",
+    "neqo-http3/.cargo-checksum.json": "b4370954f80450c5f632af1bd7501c93a39b144ee7b50f9fb425421aeeebd5ad",
+    "neqo-qpack/.cargo-checksum.json": "c598a5c4ff4340971864482f1b0f94983573311234e75e7663b506e8c2a0b8b8",
+    "nss-rs/.cargo-checksum.json": "97fca536fb1cf8a5037affc08e9e3aac36ab24dbaa49d4120f5d7a1180d81d09"
+  }
+}

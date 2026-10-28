@@ -24,7 +24,7 @@ class Pipe final {
   bool Accept();
   bool Read(std::string* frame);
   bool Write(const std::string& frame);
-  // Worker mode uses the same framing with stable OVERLAPPED buffers. Queue
+  // Worker mode uses the same framing with stable nonblocking buffers. Queue
   // and Poll never wait for a computing peer; one completed receive is enough
   // to apply backpressure. The default RPC methods above stay synchronous.
   bool ListenAsync(const char* name);
@@ -41,7 +41,14 @@ class Pipe final {
   bool OpenClient(const char* name, bool asynchronous);
   bool OpenServer(const char* name, bool asynchronous);
   bool Transfer(void* data, unsigned length, bool writing);
+#ifdef _WIN32
   void* handle_ = nullptr;
+  bool IsOpen() const { return handle_ != nullptr; }
+#else
+  int handle_ = -1;
+  std::string socketPath_;
+  bool IsOpen() const { return handle_ >= 0; }
+#endif
   PipeAsync* async_ = nullptr;
 };
 }

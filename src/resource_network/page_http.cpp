@@ -10,7 +10,9 @@
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
+#ifdef _WIN32
 #include <windows.h>
+#endif
 
 namespace ruyijs::resource_network {
 namespace {
@@ -53,9 +55,13 @@ bool HttpExchange::Prepare(HttpResult* local) {
   }
   hopStart_=observe_?model_.HttpNow():0;
   if(observe_) {
+#ifdef _WIN32
     LARGE_INTEGER counter,frequency;
     QueryPerformanceCounter(&counter);QueryPerformanceFrequency(&frequency);
     hopTick_=double(counter.QuadPart)*1000/double(frequency.QuadPart);
+#else
+    hopTick_=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now().time_since_epoch()).count();
+#endif
   }
   url_ = address_.href();
   ResourceSnapshot stored;

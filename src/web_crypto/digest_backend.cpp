@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include "web_crypto/digest_backend.h"
 #include <windows.h>
 #include <bcrypt.h>
@@ -21,3 +22,5 @@ bool ComputeDigest(HashAlgorithm algorithm, const void* input, size_t length,
   return true;
 }
 }
+
+#endif

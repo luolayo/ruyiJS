@@ -1,0 +1,24 @@
+{
+  "source_wheel": {
+    "filename": "ruyijs-0.1.5-py3-none-win_amd64.whl",
+    "url": "https://files.pythonhosted.org/packages/5b/bd/e3b3b231e7c9712a09239559d01ca9d466913b7985dc4df2ca562ac5f4fc/ruyijs-0.1.5-py3-none-win_amd64.whl",
+    "size": 43400031
+  },
+  "sha256": "cc4c0ed62ba28b55d19eea517e0d4e937cabf6502e48c8f7c241bdcc66e5bd03",
+  "nss_version": "3.130",
+  "nspr_version": "4.40",
+  "protocols": [
+    "http/1.0",
+    "http/1.1",
+    "h2",
+    "h3"
+  ],
+  "http3": true,
+  "mozilla_libraries_sha256": {
+    "libmozglue.dylib": "074e5256163e544ccbda854fda52dd5609c5cb00f47d9b400bd38d9b426daa71",
+    "libnss3.dylib": "105ebb0af5b998723dc9fb89f65ba7b621f41a9d678c259d0702552bcdbb3cc3",
+    "libsoftokn3.dylib": "b0c67e2f5423c5dba378b32366e6b79674b8eba3a9440b18ff6084953781f909",
+    "libfreebl3.dylib": "8f7c933331c8acf08a397cf03cf16826f199dde05be3bfdcd578d798ddcadf43"
+  },
+  "webtransport": true
+}

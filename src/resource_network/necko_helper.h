@@ -5,6 +5,7 @@
 #include <vector>
 
 namespace ruyijs::resource_network {
+#ifdef _WIN32
 class NeckoHelper {
  public:
   ~NeckoHelper() {
@@ -57,7 +58,7 @@ class NeckoHelper {
     std::lock_guard<std::mutex> guard(lock_);
     if (process_) TerminateProcess(process_.Get(), ERROR_OPERATION_ABORTED);
   }
-  bool Finish(ULONGLONG deadline) {
+  bool Finish(uint64_t deadline) {
     DWORD status = 1;
     return WaitForSingleObject(process_.Get(), NeckoRemaining(deadline)) == WAIT_OBJECT_0 &&
         GetExitCodeProcess(process_.Get(), &status) && status == 0;
@@ -66,5 +67,18 @@ class NeckoHelper {
   std::mutex lock_;
   NeckoHandle process_, job_;
 };
+#else
+class NeckoHelper {
+ public:
+  ~NeckoHelper();
+  bool Start(const std::wstring&, NeckoPipe&, NeckoPipe&, const wchar_t*);
+  void Cancel();
+  bool Finish(uint64_t deadline);
+ private:
+  std::mutex lock_;
+  int pid_ = 0;
+  bool reaped_ = false;
+};
+#endif
 bool NeckoPythonPath(std::wstring*);
 }

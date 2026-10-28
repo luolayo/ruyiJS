@@ -13,7 +13,6 @@
 /out-share-*.zip.sha256
 /artifacts/
 /tests/
-/tools/
 __pycache__/
 # Runtime components (embedded Python, wheels, derived Necko) ship with releases.
 /vendor/*

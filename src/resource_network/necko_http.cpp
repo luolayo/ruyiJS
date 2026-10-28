@@ -72,7 +72,7 @@ std::string OriginOf(const std::string& url) {
   for (char& c : origin) if (c >= 'A' && c <= 'Z') c = char(c - 'A' + 'a');
   return origin;
 }
-bool Acquire(const std::string& origin, ULONGLONG deadline, Lease* lease) {
+bool Acquire(const std::string& origin, uint64_t deadline, Lease* lease) {
   auto& pool = Sessions();
   std::unique_lock<std::mutex> guard(pool.lock);
   for (;;) {
@@ -103,7 +103,7 @@ bool Acquire(const std::string& origin, ULONGLONG deadline, Lease* lease) {
       lease->slot = chosen;
       return true;
     }
-    const ULONGLONG now = GetTickCount64();
+    const uint64_t now = ruyijs::MonotonicMilliseconds();
     if (now >= deadline) return false;
     pool.available.wait_for(guard, std::chrono::milliseconds(deadline - now));
   }
@@ -111,7 +111,7 @@ bool Acquire(const std::string& origin, ULONGLONG deadline, Lease* lease) {
 }
 bool NeckoHttp(const std::string& method, const std::string& url, const HeaderPairs& headers,
                const std::string& body, HttpResult* result, uint32_t timeoutMs) {
-  const ULONGLONG deadline = GetTickCount64() + timeoutMs;
+  const uint64_t deadline = ruyijs::MonotonicMilliseconds() + timeoutMs;
   const std::string origin = OriginOf(url);
   // A helper can disappear between two requests (proxy tunnel reset, worker
   // restart, or a half-closed pipe).  In that case no response frame exists,
@@ -129,8 +129,12 @@ bool NeckoHttp(const std::string& method, const std::string& url, const HeaderPa
       session = std::make_unique<Session>();
       if (!session->Start()) {
         session.reset();
+#ifdef __APPLE__
+        result->error = "macOS Necko helper is missing or failed to start; a compatible RUYIJS_NECKO_PYTHON runtime is required";
+#else
         result->error = "Necko worker startup failed";
-        if (attempt == 0 && GetTickCount64() < deadline) continue;
+#endif
+        if (attempt == 0 && ruyijs::MonotonicMilliseconds() < deadline) continue;
         return false;
       }
     }
@@ -144,7 +148,7 @@ bool NeckoHttp(const std::string& method, const std::string& url, const HeaderPa
     }
     if (!framed) session.reset();
     result->error = candidate.error.empty() ? "Necko request failed" : std::move(candidate.error);
-    if (!framed && attempt == 0 && GetTickCount64() < deadline) continue;
+    if (!framed && attempt == 0 && ruyijs::MonotonicMilliseconds() < deadline) continue;
     return false;
   }
   result->error = "Necko request failed";

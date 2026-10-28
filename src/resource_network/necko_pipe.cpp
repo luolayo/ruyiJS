@@ -1,8 +1,9 @@
+#ifdef _WIN32
 #include "resource_network/necko_pipe.h"
 #include <string>
 
 namespace ruyijs::resource_network {
-DWORD NeckoRemaining(ULONGLONG deadline) {
+uint32_t NeckoRemaining(uint64_t deadline) {
   const auto now = GetTickCount64();
   return now >= deadline ? 0 : DWORD(deadline - now);
 }
@@ -33,7 +34,7 @@ bool NeckoPipe::Open(bool parentWrites) {
   }
   return error == ERROR_PIPE_CONNECTED;
 }
-bool NeckoPipe::Transfer(void* data, uint32_t size, bool writing, ULONGLONG deadline) {
+bool NeckoPipe::Transfer(void* data, uint32_t size, bool writing, uint64_t deadline) {
   auto* bytes = static_cast<char*>(data);
   uint32_t done = 0;
   while (done < size) {
@@ -61,10 +62,12 @@ bool NeckoPipe::Transfer(void* data, uint32_t size, bool writing, ULONGLONG dead
   }
   return true;
 }
-bool NeckoPipe::Write(const void* data, uint32_t size, ULONGLONG deadline) {
+bool NeckoPipe::Write(const void* data, uint32_t size, uint64_t deadline) {
   return Transfer(const_cast<void*>(data), size, true, deadline);
 }
-bool NeckoPipe::Read(void* data, uint32_t size, ULONGLONG deadline) {
+bool NeckoPipe::Read(void* data, uint32_t size, uint64_t deadline) {
   return Transfer(data, size, false, deadline);
 }
 }
+
+#endif

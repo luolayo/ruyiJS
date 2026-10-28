@@ -1,3 +1,4 @@
+#ifdef _WIN32
 // Source-owned libavif parses the container; dav1d performs actual AV1 decoding.
 #include "web_media/image_codec.h"
 #include "../../vendor/image-native/libavif/include/avif/avif.h"
@@ -39,3 +40,5 @@ domain::web_media::ImageDecodeStatus DecodeAvifBytes(const std::vector<uint8_t>&
   return Status::Ok;
 }
 }
+
+#endif

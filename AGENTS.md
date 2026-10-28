@@ -9,7 +9,7 @@ ruyiJS is a **headless Firefox engine for Python** — it embeds the real Spider
 ## Key facts
 
 - **Language:** Python 3.10+ (user-facing), C++ (engine bindings), JavaScript (browser contexts)
-- **Platform:** Windows x64 only
+- **Platform:** Windows x64 releases; experimental macOS 27+ ARM64 source build and local wheel. See `docs/macos-arm64-wheel.md` for packaging/isolated installation tests and remaining release work.
 - **License:** MPL-2.0
 - **Install:** `pip install ruyijs`
 - **Entry point:** `from ruyijs import Context`

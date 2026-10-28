@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include "web_crypto/cng_backend.h"
 #include <windows.h>
 #include <bcrypt.h>
@@ -176,3 +177,5 @@ bool EcdhSecret(const ec::EcKey& privateKey, const ec::EcKey& publicKey, Bytes* 
   return ok;
 }
 }  // namespace ruyijs::web_crypto
+
+#endif

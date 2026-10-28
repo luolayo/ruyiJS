@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include "web_workers/process.h"
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
@@ -34,3 +35,5 @@ bool Process::Stop() {
   return stopped;
 }
 }
+
+#endif

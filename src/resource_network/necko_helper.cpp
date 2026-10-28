@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include "resource_network/necko_helper.h"
 
 namespace ruyijs::resource_network {
@@ -14,3 +15,5 @@ bool NeckoPythonPath(std::wstring* python) {
   return true;
 }
 }
+
+#endif

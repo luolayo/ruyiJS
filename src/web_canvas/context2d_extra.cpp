@@ -2,6 +2,7 @@
 #include "web_canvas/internal.h"
 #include "document_model/state.h"
 #include "web_media/image_codec.h"
+#include "web_canvas/image_pixels.h"
 #include "js/ForOfIterator.h"
 #include "js/Realm.h"
 
@@ -33,7 +34,8 @@ bool ReadDrawPixels(State& state, JS::HandleValue value, DrawPixels* out) {
                                                      wrapper->imageNaturalHeight, false, &decoded);
     if (status != ruyijs::domain::web_media::ImageDecodeStatus::Ok || decoded.frames.empty()) return false;
     const auto& frame = decoded.frames.front();
-    out->width = frame.width; out->height = frame.height; out->bytes = frame.pixels;
+    out->width = frame.width; out->height = frame.height;
+    DecodedCanvasPixels(frame, &out->bytes);
     return out->width && out->height && out->bytes.size() >= size_t(out->width) * out->height * 4;
   }
   return false;

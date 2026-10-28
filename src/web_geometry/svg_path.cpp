@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
@@ -52,3 +53,5 @@ bool SvgPathBounds(const std::vector<ruyijs::domain::geometry::SvgPathCommand>& 
   return true;
 }
 }
+
+#endif

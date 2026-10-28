@@ -1,6 +1,7 @@
 #include "runtime/interface_objects.h"
 #include "runtime/runtime.h"
 #include "runtime/pipe.h"
+#include "runtime/platform_process.h"
 #include "runtime/exception_capture.h"
 #include "runtime/page_helpers.h"
 #include "runtime/worker_owners.h"
@@ -36,9 +37,24 @@
 
 namespace ruyijs {
 bool RunWorker(JSContext* cx, js::cli::OptionParser* options, Checkpoint checkpoint) {
-  JS_SetGCParameter(cx, JSGC_COMPACTING_ENABLED, 0);
   const char* name = options->getStringOption("ruyijs-worker");
   if (!name) { JS_ReportErrorASCII(cx, "ruyijs worker requires a pipe name"); return false; }
+#ifdef __APPLE__
+  const auto parent = getppid();
+  std::thread([parent, endpoint = std::string(name)] {
+    for (;;) {
+      SleepMilliseconds(100);
+      if (getppid() != parent) {
+        if (endpoint.starts_with("/tmp/ruyijs-worker-") && endpoint.ends_with("/rpc.sock")) {
+          unlink(endpoint.c_str());
+          rmdir(endpoint.substr(0, endpoint.size() - 9).c_str());
+        }
+        _exit(0);
+      }
+    }
+  }).detach();
+#endif
+  JS_SetGCParameter(cx, JSGC_COMPACTING_ENABLED, 0);
   Pipe pipe;
   if (!pipe.ConnectAsync(name)) {
     JS_ReportErrorASCII(cx, "ruyijs worker pipe connection failed"); return false;

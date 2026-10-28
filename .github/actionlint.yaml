@@ -1,0 +1,5 @@
+# GitHub's official macOS 27 ARM64 preview label is newer than actionlint's
+# built-in runner list. This allow-list does not select self-hosted execution.
+self-hosted-runner:
+  labels:
+    - xcode-27

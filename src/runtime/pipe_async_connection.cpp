@@ -1,6 +1,7 @@
 #include "runtime/pipe_async.h"
 
 namespace ruyijs {
+#ifdef _WIN32
 PipeResult PipeError(DWORD error) {
   return error == ERROR_BROKEN_PIPE || error == ERROR_NO_DATA ||
       error == ERROR_PIPE_NOT_CONNECTED || error == ERROR_OPERATION_ABORTED
@@ -13,6 +14,7 @@ void CancelPipeOperation(HANDLE pipe, PipeOperation& operation) {
   GetOverlappedResult(pipe, &operation.value, &ignored, TRUE);
   operation.pending = false;
 }
+#endif
 bool Pipe::ListenAsync(const char* name) {
   if (async_ || !OpenServer(name, true)) return false;
   async_ = NewPipeAsync();
@@ -24,10 +26,13 @@ bool Pipe::ConnectAsync(const char* name) {
   if (async_ || !OpenClient(name, true)) return false;
   async_ = NewPipeAsync();
   if (!async_) { Close(); return false; }
+#ifdef _WIN32
   async_->connected = true;
+#endif
   return true;
 }
-PipeResult PipeAccept(HANDLE pipe, PipeAsync& state) {
+#ifdef _WIN32
+PipeResult PipeAccept(PipeHandle& pipe, PipeAsync& state) {
   if (state.connected) return PipeResult::Ready;
   auto& op = state.accept;
   if (!op.pending) {
@@ -68,4 +73,5 @@ PipeResult PipeIo(HANDLE pipe, PipeOperation& op, bool writing,
   op.pending = false;
   return *transferred ? PipeResult::Ready : PipeResult::Closed;
 }
+#endif
 }

@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include "web_geometry/font_backend.h"
 #include <algorithm>
 #include <cmath>
@@ -118,3 +119,5 @@ bool SystemFonts::Measure(const std::u16string& source, const FontInput& input,
   return true;
 }
 }
+
+#endif

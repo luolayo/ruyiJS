@@ -22,6 +22,9 @@ own license:
   - encoding_rs (src/web_platform/encoding_rs/)    Apache-2.0 OR MIT
   - Brotli                                         MIT
   - CPython (embedded runtime)                     PSF-2.0
+  - python-build-standalone (macOS distribution)    component licenses in licenses/python/
+  - Neqo / nss-rs                                  MIT OR Apache-2.0
+  - OpenSSL (macOS WebCrypto backend)              Apache-2.0
   - Python packages used by Necko                  their respective licenses
       (h2, hpack, hyperframe, cryptography, cffi, pycparser, certifi, idna,
        charset-normalizer, publicsuffixlist, brotli, requests, urllib3, zstandard)

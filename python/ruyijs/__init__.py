@@ -1,4 +1,4 @@
-"""ruyijs: persistent SpiderMonkey contexts for Python 3.10+ on Windows x64."""
+"""Persistent SpiderMonkey contexts on Windows x64 and macOS ARM64."""
 
 from ._context import Context
 from ._values import JSError, UNDEFINED

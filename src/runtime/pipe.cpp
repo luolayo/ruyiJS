@@ -1,6 +1,7 @@
 #include "runtime/pipe.h"
 #include <cstdint>
 #include <cstring>
+#ifdef _WIN32
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -8,10 +9,12 @@
 #define NOMINMAX
 #endif
 #include <windows.h>
+#endif
 
 namespace ruyijs {
 Pipe::~Pipe() { Close(); }
 
+#ifdef _WIN32
 namespace {
 // One name grammar for both ends: the owner creates the pipe and the child
 // connects with the same name.
@@ -70,6 +73,7 @@ bool Pipe::Transfer(void* data, unsigned length, bool writing) {
   }
   return true;
 }
+#endif
 
 bool Pipe::Read(std::string* frame) {
   uint32_t length = 0;

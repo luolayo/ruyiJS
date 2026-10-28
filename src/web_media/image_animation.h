@@ -1,5 +1,5 @@
 #pragma once
-#include "web_media/image_wic.h"
+#include "web_media/image_codec.h"
 namespace ruyijs::web_media {
 struct ImagePatch {
   uint32_t x=0,y=0,width=0,height=0;

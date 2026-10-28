@@ -20,7 +20,7 @@ from ._console import ConsoleControl
 from ._inspector import InspectorControl
 from ._input import InputControl
 from ._context_eval import EvaluationControl
-from ._runtime_paths import get_runtime_path
+from ._runtime_paths import get_runtime_path, shell_name
 from ._values import JSError, decode, encode
 
 
@@ -57,7 +57,7 @@ class Context(EnvironmentControl, SchedulingControl, RandomControl, ResourceCont
         self._closed, self._pipe, self._process, self._stderr = True, None, None, None
         selected = shell or os.environ.get("RUYIJS_SHELL")
         self.shell = (Path(selected).resolve() if selected else
-                      get_runtime_path() / "dist" / "js.exe")
+                      get_runtime_path() / "dist" / shell_name())
         if not self.shell.is_file():
             raise FileNotFoundError(f"ruyijs shell does not exist: {self.shell}")
         try:
@@ -67,16 +67,20 @@ class Context(EnvironmentControl, SchedulingControl, RandomControl, ResourceCont
                 [str(self.shell), "--ruyijs-rpc", self._pipe.name,
                  "--ruyijs-mode", mode],
                 stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=self._stderr,
-                creationflags=subprocess.CREATE_NO_WINDOW, close_fds=True,
+                creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0, close_fds=True,
                 env=child_environment,
             )
-            self._pipe.connect(time.monotonic() + self.timeout)
+            deadline = time.monotonic() + self.timeout
+            if os.name == "nt":
+                self._pipe.connect(deadline)
+            else:
+                self._pipe.connect(deadline, self._process)
             self._closed = False
             if environment is not None:
                 self.configure_environment(environment)
         except BaseException as error:
             if isinstance(error, EOFError) or (
-                    isinstance(error, OSError) and error.winerror == 109):
+                    isinstance(error, OSError) and getattr(error, "winerror", None) == 109):
                 if self._process is not None and self._process.poll() is None:
                     try:
                         self._process.wait(timeout=1)

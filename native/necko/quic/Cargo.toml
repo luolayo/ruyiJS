@@ -1,0 +1,28 @@
+[package]
+name = "ruyijs-necko-quic"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+name = "necko_quic"
+crate-type = ["cdylib"]
+
+[dependencies]
+neqo-http3 = { path = "../../../build/upstream/firefox-158.0/third_party/rust/neqo-http3" }
+neqo-transport = { path = "../../../build/upstream/firefox-158.0/third_party/rust/neqo-transport" }
+neqo-common = { path = "../../../build/upstream/firefox-158.0/third_party/rust/neqo-common" }
+nss = { package = "nss-rs", git = "https://github.com/mozilla/nss-rs", version = "0.14" }
+base64 = "0.22"
+serde_json = "1"
+
+[profile.release]
+debug = 1
+
+[patch.crates-io]
+windows = { path = "../../../build/upstream/firefox-158.0/build/rust/windows" }
+windows-targets = { path = "../../../build/upstream/firefox-158.0/build/rust/windows-targets" }
+windows-link = { path = "../../../build/upstream/firefox-158.0/build/rust/windows-link" }
+mozbuild = { path = "../../../build/upstream/firefox-158.0/build/rust/mozbuild" }
+bindgen = { path = "../../../build/upstream/firefox-158.0/build/rust/bindgen" }
+toml = { path = "../../../build/upstream/firefox-158.0/build/rust/toml" }

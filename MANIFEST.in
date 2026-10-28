@@ -1,5 +1,6 @@
 include README.md LICENSE NOTICE pyproject.toml setup.py runtime.json
 include tools/wheel_runtime.py
+include tools/wheel_runtime_macos.py
 recursive-include python/ruyijs *.py
 include examples/README.md examples/google/google_search.py examples/boss/boss.py
 recursive-include examples/turnstile *.py *.md

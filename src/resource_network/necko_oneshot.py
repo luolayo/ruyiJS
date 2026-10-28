@@ -8,6 +8,20 @@ reuses them (docs/NECKO_TRANSPORT.md, ARCHITECTURE "Necko 会话传输").
 import os
 import struct
 import sys
+import threading
+import time
+
+if __name__ == "__main__" and sys.platform == "darwin":
+    parent = int(os.environ.pop("RUYIJS_NECKO_PARENT_PID", str(os.getppid())))
+    if parent <= 1 or os.getppid() != parent:
+        os._exit(0)
+    def watch_parent():
+        while True:
+            time.sleep(0.1)
+            if os.getppid() != parent:
+                os._exit(0)
+    threading.Thread(target=watch_parent, daemon=True).start()
+
 from urllib.parse import urlsplit
 from necko.adapters import HTTPAdapter
 from requests import Request
@@ -89,7 +103,8 @@ def serve(adapter, method, url, headers, body):
     prepared = Request(method, url, headers=fields, data=body or None).prepare()
     control = RequestControl(BUDGET, max_attempts=ATTEMPTS)
     reader = open_response(adapter, prepared, control,
-                           timeout=(BUDGET, READ), verify=True, proxies=transport_proxies())
+                           timeout=(BUDGET, READ), verify=os.environ.get("RUYIJS_CA_BUNDLE") or True,
+                           proxies=transport_proxies())
     chunks, total = [], 0
     try:
         for chunk in reader:

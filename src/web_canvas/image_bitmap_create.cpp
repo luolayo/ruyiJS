@@ -4,6 +4,7 @@
 #include "web_canvas/internal.h"
 #include "document_model/state.h"
 #include "web_media/image_codec.h"
+#include "web_canvas/image_pixels.h"
 #include "js/Conversions.h"
 #include "js/GlobalObject.h"
 #include "js/Wrapper.h"
@@ -98,7 +99,8 @@ bool Source(State& s, JS::HandleValue value, Pixels* out) {
     if (status != ruyijs::domain::web_media::ImageDecodeStatus::Ok || decoded.frames.empty())
       return Invalid(s, "The source image could not be decoded");
     const auto& frame = decoded.frames.front();
-    out->width = frame.width; out->height = frame.height; out->bytes = frame.pixels;
+    out->width = frame.width; out->height = frame.height;
+    DecodedCanvasPixels(frame, &out->bytes);
     return true;
   }
   if (clasp == &kImageDataClass) {

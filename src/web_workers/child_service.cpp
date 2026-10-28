@@ -3,7 +3,7 @@
 #include "web_workers/clone.h"
 #include "runtime/pipe.h"
 #include "jsapi.h"
-#include <windows.h>
+#include "runtime/platform_process.h"
 
 namespace ruyijs::web_workers {
 PipeResult Child::NextFrame(std::string* frame, bool* received) {
@@ -21,8 +21,8 @@ bool Child::Exchange(std::string_view request, std::string* reply) {
   outgoing.append(request);
   if (!pipe_.Queue(std::move(outgoing)))
     return WebKit::Fail(cx_, "Worker service queue is full or closed");
-  const ULONGLONG deadline = GetTickCount64() + 30000;
-  while (GetTickCount64() < deadline) {
+  const uint64_t deadline = MonotonicMilliseconds() + 30000;
+  while (MonotonicMilliseconds() < deadline) {
     std::string frame;
     bool received = false;
     const auto status = pipe_.Poll(&frame, &received);
@@ -41,7 +41,7 @@ bool Child::Exchange(std::string_view request, std::string* reply) {
       deferredBytes_ += frame.size();
       deferred_.push_back(std::move(frame));
     } else if (status == PipeResult::Closed || status == PipeResult::Failed) break;
-    else Sleep(2);
+    else SleepMilliseconds(2);
   }
   closed_ = true;
   return WebKit::Fail(cx_, "Worker service channel closed, exceeded its queue, or timed out");

@@ -1,3 +1,4 @@
+#ifdef _WIN32
 // Operating-system codec adapter. The domain sees encoded bytes and real pixels.
 #include "web_media/image_wic.h"
 #include "web_media/image_animation.h"
@@ -109,3 +110,5 @@ domain::web_media::ImageDecodeStatus DecodeImageBytes(const std::string& type,
   } catch (const std::bad_alloc&) { return Status::OutOfMemory; }
 }
 }
+
+#endif

@@ -253,7 +253,7 @@ Python 3.10 and above on Windows x64 (64-bit). Tested up to Python 3.14.
 <details>
 <summary><b>Does it work on macOS or Linux?</b></summary>
 
-Not yet — currently Windows x64 only. Cross-platform support is planned.
+Published wheels are still Windows x64 only. A local experimental Apple Silicon wheel and source build now run the real `Context.eval()`, DOM, callbacks and HTTP/HTTPS networking (HTTP/1.1, HTTP/2 and HTTP/3) plus WebTransport on macOS 27. See the [macOS runtime guide](docs/macos-arm64-runtime.md) and [network guide](docs/macos-arm64-network.md). HTTP/3 and WebTransport are verified against real local QUIC peers; public HTTP3 probes currently fail with UDP connection-refused errors in the test environment. The [macOS wheel guide](docs/macos-arm64-wheel.md) covers offline installation and isolated tests; this wheel has not been published or notarized. Linux is not supported yet.
 </details>
 
 <details>

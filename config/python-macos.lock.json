@@ -1,0 +1,22 @@
+{
+  "version": "3.13.18",
+  "release": "20261026",
+  "target": "aarch64-apple-darwin",
+  "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.13.18%2B20261026-aarch64-apple-darwin-install_only_stripped.tar.gz",
+  "sha256": "8392b6ea51d94391befb2c31ebe75463f045d0b69dfcf5e1bb3234e1f5fa3405",
+  "size": 25265774,
+  "unpacked_limit": 268435456,
+  "source": "https://github.com/astral-sh/python-build-standalone",
+  "full_archive": {
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.13.18%2B20261026-aarch64-apple-darwin-pgo%2Blto-full.tar.zst",
+    "size": 61179160,
+    "sha256": "5706f1fdf82f7ea10b56a9b9cbadfa5f372010568a9794f19e0af4c48d975f34"
+  },
+  "verification_host": {
+    "version": "3.14.10",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.14.10%2B20261026-aarch64-apple-darwin-install_only_stripped.tar.gz",
+    "size": 26753457,
+    "sha256": "95eb8c87d16af37c54e9765e31d8c56c0d8ffa9968ea0f704f73a9b83f84e9f9",
+    "unpacked_limit": 268435456
+  }
+}

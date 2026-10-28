@@ -7,7 +7,7 @@
 #include "jsapi.h"
 #include "js/Array.h"
 #include "js/PropertyAndElement.h"
-#include <windows.h>
+#include "runtime/platform_process.h"
 #include <map>
 #include <mutex>
 #include <set>
@@ -29,10 +29,14 @@ std::wstring Lower(const std::wstring& text) {
   return out;
 }
 std::wstring Wide(const std::string& utf8) {
+#ifdef _WIN32
   const int size = MultiByteToWideChar(CP_UTF8, 0, utf8.data(), int(utf8.size()), nullptr, 0);
   std::wstring out(size, L'\0');
   if (size) MultiByteToWideChar(CP_UTF8, 0, utf8.data(), int(utf8.size()), out.data(), size);
   return out;
+#else
+  return WidePath(utf8);
+#endif
 }
 bool Text(JSContext* cx, JS::HandleValue value, std::string* out) {
   JS::RootedString text(cx, value.toString());

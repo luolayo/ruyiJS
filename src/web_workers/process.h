@@ -31,8 +31,14 @@ class Process final {
   size_t queuedBytes() const { return pipe_.queuedBytes(); }
  private:
   Pipe pipe_;
+#ifdef _WIN32
   void* process_ = nullptr;
   void* job_ = nullptr;
+#else
+  int pid_ = 0;
+  mutable bool reaped_ = false;
+  std::string socketDirectory_;
+#endif
 };
 }
 #endif
